@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'webview_mobile_and_mac.dart';
 import 'webview_web.dart' if (dart.library.io) "webview_web_vain.dart";
-import 'webview_windows_and_linux.dart'
+import 'webview_windows.dart'
+    if (dart.library.html) "webview_windows_and_linux_vain.dart";
+import 'webview_linux.dart'
     if (dart.library.html) "webview_windows_and_linux_vain.dart";
 
 class WebViewControl extends StatelessWidget {
@@ -20,7 +22,9 @@ class WebViewControl extends StatelessWidget {
       view = WebviewWeb(control: control);
     } else if (isMobilePlatform() || isMacOSDesktop()) {
       view = WebviewMobileAndMac(control: control);
-    } else if (isWindowsDesktop() || isLinuxDesktop()) {
+    } else if (isWindowsDesktop()) {
+      view = WebviewWindows(control: control);
+    } else if (isLinuxDesktop()) {
       view = const WebviewDesktop();
     }
 
